@@ -1,0 +1,10 @@
+.DS_Store
+
+# IntelliJ project files
+.idea
+*.iml
+out
+
+config/srs.ini
+node_modules/
+config/tls/
