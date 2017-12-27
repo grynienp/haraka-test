@@ -1,0 +1,24 @@
+; host to connect to
+host=email-smtp.us-east-1.amazonaws.com
+;
+; port to connect to
+port=587
+;
+; timeout backend connection from pool
+;timeout=300
+;
+; max connections in pool
+;max_connections=1000
+;
+; uncomment to enable TLS to the backend SMTP server
+enable_tls=true
+;
+; for messages that have multiple RCPT, send a separate message for each RCPT
+; when forwarding.
+;one_message_per_rcpt=true
+;
+; uncomment to use smtp client authorization
+; ses-smtp-user.haraka
+auth_type=login
+auth_user=AKIAFTQ2BXYAQ2FRS27A
+auth_pass=Zmd6ZLRqky3L3Vajnv2bLGJmjP0NXLE0qRE0ymOrmDp=
