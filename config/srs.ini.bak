@@ -1,0 +1,1 @@
+mongoUrl=mongodb://username:password@r1.example.net:27017/email

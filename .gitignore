@@ -6,5 +6,6 @@
 out
 
 config/srs.ini
+config/smtp_forward.ini
 node_modules/
 config/tls/
