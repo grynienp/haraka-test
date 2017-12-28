@@ -4,6 +4,7 @@
 
 // Put your plugin code here
 // type: `haraka -h Plugins` for documentation on how to create a plugin
+'use strict';
 
 const Address = require('address-rfc2821').Address;
 
