@@ -1,1 +1,12 @@
-mongoUrl=mongodb://username:password@r1.example.net:27017/email
+username=
+password=
+host=db.example.com
+port=27017
+db=myDb
+replset=
+host2=
+host3=
+port2=
+port3=
+ssl=false
+collection=collection

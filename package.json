@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/trentmillar/haraka-test#readme",
   "dependencies": {
-    "Haraka": "^2.8.16"
+    "Haraka": "^2.8.16",
+    "mongodb": "^3.0.1"
   }
 }

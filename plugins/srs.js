@@ -7,6 +7,8 @@
 'use strict';
 
 const Address = require('address-rfc2821').Address;
+const MongoClient = require('mongodb').MongoClient;
+const config = {};
 
 exports.register = function () {
     const plugin = this;
@@ -23,17 +25,69 @@ exports.register = function () {
 exports.load_srs_ini = function () {
     const plugin = this;
 
-    plugin.cfg = plugin.config.get('srs.ini', {
-            booleans: [
-                '-main.mongoUrl',
-            ],
-        },
+    var p = plugin.config;
+
+    plugin.cfg = p.get('srs.ini', {},
         function () {
             plugin.load_srs_ini();
         });
+
+
 };
 
 exports.hook_queue = function (next, connection) {
+    const plugin = this;
+
+    config.db = {};
+    config.db = {
+        username: plugin.cfg.main.username || '',
+        password: plugin.cfg.main.password || '',
+        host: plugin.cfg.main.host || 'localhost',
+        name: plugin.cfg.main.db || 'loothoot',
+        port: plugin.cfg.main.port || 27017,
+        host2: plugin.cfg.main.host2,
+        port2: plugin.cfg.main.port2,
+        host3: plugin.cfg.main.host3,
+        port3: plugin.cfg.main.port3,
+        replset: plugin.cfg.main.replset,
+        ssl: plugin.cfg.main.ssl,
+        collection: plugin.cfg.main.collection
+    };
+
+    var credentials = (config.db.username && config.db.password)
+        ? config.db.username + ':' + config.db.password + '@'
+        : '';
+
+    config.db.url = 'mongodb://' + credentials + config.db.host + ':' + config.db.port;
+
+    if(config.db.host2 && config.db.port2) {
+        config.db.url += ',' + config.db.host2 +':' + config.db.port2;
+    }
+
+    if(config.db.host3 && config.db.port3) {
+        config.db.url += ',' + config.db.host3 +':' + config.db.port3;
+    }
+
+    config.db.url = config.db.url + '/' + config.db.name;
+
+    if(config.db.replset){
+        config.db.url += '?replicaSet=' + config.db.replset + '&w=1';
+    }
+
+    if(config.db.ssl && config.db.ssl == 'true') {
+
+        if (config.db.url.indexOf('?') > -1) {
+            config.db.url += '&ssl=true';
+        } else {
+            config.db.url += '?ssl=true';
+        }
+    }
+
+    MongoClient.connect(config.db.url, function(err, client) {
+
+        const collection = client.collection(config.db.collection);
+        client.close();
+    });
     
     var from = 'client-90210@manwithacalculator.com';
     var to = 'trent.millar@gmail.com'; //'bookkeeper-11000@manwithacalculator.com';
