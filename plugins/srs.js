@@ -333,6 +333,7 @@ exports.hook_queue = function (next, connection) {
                     }
 
                 ], function(err){
+
                     if(err) {
                         return cb(err);
                     }
@@ -424,7 +425,9 @@ exports.hook_queue = function (next, connection) {
             err = null;
         }
 
-        var list = connection.transaction.header.header_list;
+        connection.loginfo("FINISHED " + err);
+        
+        /*var list = connection.transaction.header.header_list;
         for(var i = 0; i < list.length; i++){
             if(list[i].startsWith('Received:')) {
                 list[i] = list[i].replace(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
@@ -437,7 +440,8 @@ exports.hook_queue = function (next, connection) {
         var keys = Object.getOwnPropertyNames(connection.transaction);
         for (var i = keys.length - 1; i >= 0; i--) {
             connection.loginfo(keys[i] + " - " + connection.transaction[keys[i]]);
-        }
+        }*/
+
       return next(err);
     });
 };
