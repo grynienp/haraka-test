@@ -13,10 +13,12 @@
 
 # CONNECT
 #toobusy
-#relay
+relay
+
 # control which IPs, rDNS hostnames, HELO hostnames, MAIL FROM addresses, and
 # RCPT TO address you accept mail from. See 'haraka -h access'.
 access
+
 # p0f
 # geoip
 # asn
@@ -29,8 +31,10 @@ dnsbl
 #early_talker
 # see config/helo.checks.ini for configuration
 helo.checks
+
 # see 'haraka -h tls' for config instructions before enabling!
-# tls
+tls
+
 #
 # AUTH plugins require TLS before AUTH is advertised, see
 #     https://github.com/haraka/Haraka/wiki/Require-SSL-TLS
